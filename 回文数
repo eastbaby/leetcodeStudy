@@ -1,0 +1,17 @@
+/**
+ * @param {number} x
+ * @return {boolean}
+ */
+var isPalindrome = function(x) {
+    let iterX = x;
+    let palinX = 0;
+    if(x < 0) return false;
+    if(x===0) return true;
+    let curNum = 0;
+    while(iterX > 0) {
+        curNum = iterX % 10; // 1; 2; 1
+        palinX = palinX * 10 + curNum; // 1; 12; 121
+        iterX = (iterX - curNum) / 10; // 12; 1; 0
+    }
+    return palinX === x;
+};

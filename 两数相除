@@ -1,0 +1,37 @@
+// median 用string来做除法。
+
+/**
+ * @param {number} dividend
+ * @param {number} divisor
+ * @return {number}
+ */
+var divide = function(dividend, divisor) {
+    if(dividend === -Math.pow(2, 31) && divisor === -1) {
+        return Math.pow(2, 31) - 1;
+    }
+    let flag = true;
+    if(dividend < 0) {
+        flag = !flag;
+    }
+    if(divisor < 0) {
+        flag = !flag;
+    }
+    dividend = Math.abs(dividend);
+    divisor = Math.abs(divisor);
+    let addone = '';
+    let resStr = '';
+    let dividendStr = dividend.toString();
+    for(let i=0; i<dividendStr.length; i++) {
+        let cur = Number(addone + dividendStr[i]);
+        let count = 0;
+        let tmp = 0;
+        while(tmp + divisor <= cur) {
+            tmp += divisor;
+            count ++;
+        }
+        resStr += count.toString();
+        addone = (cur - tmp).toString();
+    }
+    res = flag ? Number(resStr) : -Number(resStr);
+    return res;
+};

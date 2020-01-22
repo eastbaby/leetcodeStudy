@@ -1,0 +1,29 @@
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var threeSumClosest = function(nums, target) {
+    let arr = nums.sort((a, b) => (a-b));
+    let res; // 也可以赋值前三个数的和初始化
+    for(let i=0; i<arr.length; i++){
+        let one = arr[i];
+        let p = i+1, q = arr.length-1;
+        while(p<q) {
+            let tmp = arr[p] + arr[q] + one;
+            if(res == null || Math.abs(tmp - target) < Math.abs(res - target)) {
+                res = tmp;
+            }
+            if(tmp === target) {
+                return tmp;
+            }
+            if( tmp < target ) {
+                p ++;
+            }
+            if( tmp > target ) {
+                q --;
+            }
+        }
+    }
+    return res;
+};

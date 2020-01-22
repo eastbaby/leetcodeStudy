@@ -1,0 +1,39 @@
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var searchRange = function(nums, target) {
+    if(nums.length === 0) {
+        return [-1, -1];
+    }
+    if(nums.length === 1) {
+        let find = nums[0] === target;
+        return find ? [0,0] : [-1,-1];
+    }
+    let cand = [];
+    helper(0, nums.length, nums, target, cand);
+    if(cand.length === 0) return [-1, -1];
+    cand = cand.sort((a,b) => a-b);
+    return [cand[0], cand[cand.length - 1]];
+    
+};
+
+function helper(left, right, nums, target, cand) {
+    if(left === right) {
+        return;
+    }
+    if(nums[left] > target || nums[right-1] < target) {
+        return;
+    }
+    let mid = Math.floor((left + right) / 2);
+    if(nums[mid] > target) {
+        helper(left, mid, nums, target, cand);
+    } else if(nums[mid] < target) {
+        helper(mid+1, right, nums, target, cand);
+    } else {
+        cand.push(mid);
+        helper(left, mid, nums, target, cand);
+        helper(mid+1, right, nums, target, cand);
+    }
+}

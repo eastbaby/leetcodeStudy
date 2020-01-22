@@ -1,0 +1,35 @@
+// 空间换时间
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} n
+ * @return {ListNode}
+ */
+var removeNthFromEnd = function(head, n) {
+    let arr = [];
+    let p = head;
+    while(p) {
+        arr.push(p);
+        p = p.next;
+    }
+    if(arr.length < 2) {
+        return null;
+    }
+    if(n === arr.length) {
+        return arr[1];
+    }
+    // n = 1的情况也可以不用单独拎出来。
+    if(n === 1) { 
+        arr[arr.length - 2].next = null;
+        return head;
+    }
+    // 可以写成 arr[arr.length - n - 1].next = arr[arr.length - n].next
+    arr[arr.length - n - 1].next = arr[arr.length - n + 1];
+    return head;
+};

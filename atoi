@@ -1,0 +1,33 @@
+/**
+ * @param {string} str
+ * @return {number}
+ */
+var myAtoi = function(str) {
+    str = str.trim();
+    if(!str || !/[\d+-]/.test(str[0])) {
+        return 0;
+    }
+    let i = 0;
+    while(i+1 < str.length) {
+        if(/\d/.test(str[i+1])) {
+            i++;
+        } else {
+            break;
+        }
+    }
+
+    let candidateStr = str.slice(0, i+1);
+    let res = Number(candidateStr);
+    if(!res) {
+        return 0;
+    }
+    if(res > Math.pow(2, 31) -1 ) {
+        return Math.pow(2, 31) -1;
+    }
+    if(res < -Math.pow(2, 31)) {
+        return -Math.pow(2, 31);
+    }
+    return res;
+};
+
+// 正则 trim 都很耗时，要换成最简单的判断。

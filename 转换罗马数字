@@ -1,0 +1,21 @@
+/**
+ * @param {number} num
+ * @return {string}
+ */
+var intToRoman = function(num) {
+    const charList = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
+    const stepList = [{'I': 'I', 'V': 'V', 'X': 'X'}, {'I': 'X', 'V': 'L', 'X': 'C'}, {'I': 'C', 'V': 'D', 'X': 'M'}, {'I': 'M', 'V': 'V', 'X': 'X'}];
+    let i = 0;
+    let res = [];
+    while(num > 0) {
+        res.unshift(charList[num % 10].replace(/X/g, stepList[i]['X']).replace(/V/g, stepList[i]['V']).replace(/I/g, stepList[i]['I']));
+        num = (num - num % 10) / 10;
+        i ++;
+    }
+    return res.join('');
+};
+
+replace顺序不能反。
+
+// var str = "atetateg".replace("a",""); 则只会替换第一个a
+// var str = "atetateg".replace(/a/g,"");  会替换所有  /g 代表匹配全文

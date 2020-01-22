@@ -1,0 +1,48 @@
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var nextPermutation = function(nums) {
+    if(nums.length <= 1) return nums;
+    let prev = nums[nums.length-1];
+    for(let i=nums.length - 2; i >=0; i--) {
+        if(nums[i] < prev) {
+            // 找i位上的数字
+            let tmp;
+            let tmpPos;
+            for(let j=i+1; j<nums.length; j++) {
+                if(nums[j] > nums[i]) {
+                    if(!tmp || tmp && (nums[j] < tmp)) {
+                        tmp = nums[j];
+                        tmpPos = j;
+                    }
+                }
+            }
+            swap(i, tmpPos, nums);
+            // sort剩余后面的几个数字
+            bubbleSort(i+1, nums.length, nums);
+            return;
+        }
+        prev = nums[i];
+    }
+    // 不存在下一个更大的排列, sort整个数字
+    bubbleSort(0, nums.length, nums);
+    return;
+};
+
+function swap(a, b, nums){
+    let tmp = nums[a];
+    nums[a] = nums[b];
+    nums[b] = tmp;
+}
+
+function bubbleSort(a, b, nums) {
+    if(b-a < 2) return;
+    for(let i=0; i<b-a; i++) {
+        for(let j=a; j<b-i-1; j++) {
+            if(nums[j] > nums[j+1]) {
+                swap(j, j+1, nums);
+            }
+        }
+    }
+}

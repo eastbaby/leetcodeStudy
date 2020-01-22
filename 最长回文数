@@ -1,0 +1,43 @@
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var longestPalindrome = function(s) {
+    // res 奇数
+    let curLen = 1;
+    let curRes = '';
+    let maxLen = 0;
+    for(let i=0; i<s.length; i++) {
+        let count = 0;
+        while(true) {
+            if(i-count < 0 || count+i >= s.length || s[i-count] !== s[count+i] ) {
+                break;
+            }
+            curLen = count * 2 + 1;
+            if(curLen > maxLen) {
+                maxLen = curLen;
+                curRes = s.slice(i-count, i+count+1);
+            }
+            count++;
+        }
+    }
+
+    // res 偶数
+    for(let i=1; i<s.length; i++) {
+        let count = 0;
+        while(true) {
+            if(i-count < 0 || count+i-1 >= s.length || s[i-count] !== s[count+i-1] ) {
+                break;
+            }
+            curLen = count * 2;
+            if(curLen > maxLen) {
+                maxLen = curLen;
+                curRes = s.slice(i-count, i+count);
+            }
+            count++;
+        }
+    }
+
+    return curRes;
+
+};

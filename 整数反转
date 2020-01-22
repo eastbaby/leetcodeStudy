@@ -1,0 +1,21 @@
+// 标准解法是一个一个进行反转，并判断是否有溢出（看模的情况）
+
+/**
+ * @param {number} x
+ * @return {number}
+ */
+var reverse = function(x) {
+    const strList = x.toString().split('');
+    let reverseList;
+    if(strList && strList[0] === '-') {
+        reverseList = '-' + strList.slice(1).reverse().join('');
+    } else {
+        reverseList = strList.reverse().join('');
+    }
+
+    const candidate = parseInt(reverseList, 10);
+    if(candidate > Math.pow(2, 31) || candidate < -Math.pow(2, 31)) {
+        return 0;
+    }
+    return candidate;
+};

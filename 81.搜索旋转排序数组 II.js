@@ -1,22 +1,22 @@
+// 和33题思路完全一致
 /**
  * @param {number[]} nums
  * @param {number} target
- * @return {number}
+ * @return {boolean}
  */
 var search = function(nums, target) {
-    if(nums.length === 0) return -1;
-    if(nums.length === 1) return nums[0] === target ? 0 : -1;
+    if(nums.length === 0) return false;
+    if(nums.length === 1) return nums[0] === target ? true : false;
     let key = findKeyPoint(0, nums.length-1, nums);
    
     let sortNums = nums.slice(key).concat(nums.slice(0, key));
     let originRes = findTarget(0, nums.length-1, sortNums, target);
-    if(originRes === -1) return -1;
-    return (originRes + key) % nums.length; // 取模！！
+    if(originRes === -1) return false;
+    return true;
 };
 
 // trick, 这里最好用左闭右闭比较好做判断
 function findKeyPoint(left, right, nums) {
-    if(left === right) return -1;
     if(left+1 === right) {
         if(nums[left] > nums[right]) {
             return right;

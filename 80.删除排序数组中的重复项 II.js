@@ -2,7 +2,7 @@
  * @param {number[]} nums
  * @return {number}
  */
-// 如果题目要求是不管数组后面是啥数的话，可以考虑（无脑往前面重新赋值，两两swap，etc）
+// 如果题目要求是不管数组后面是啥数的话，可以考虑（in-place借用空元素，无脑往前面重新赋值，两两swap，倒序，etc）
 var removeDuplicates = function(nums) {
     if(nums.length < 3) return nums.length;
     let numCount = 0;

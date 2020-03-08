@@ -20,3 +20,5 @@ var inorderTraversal = function(root) {
 
 
 // 前/中/后 是相对于当前父节点的顺序来说的。
+
+// 直观思路是递归；也可以利用栈stack用循环迭代来做。
